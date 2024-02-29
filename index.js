@@ -1,8 +1,12 @@
 const express = require("express");
-const urlRoutes = require("./routes/url");
 const { connectToMongo } = require("./connect");
 const path = require("path");
+const cookieParser = require('cookie-parser')
+
+const urlRoutes = require("./routes/url");
 const staticRoute = require("./routes/staticRouter");
+const userRoute = require("./routes/user");
+const { restrictToLoggedInUserOnly, checkAuth } = require("./middlewares/auth");
 
 const app = express();
 const PORT = 8001;
@@ -17,7 +21,10 @@ app.set("views", path.resolve("./views"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use("/url", urlRoutes);
-app.use("/", staticRoute);
+app.use(cookieParser());
+
+app.use("/url", restrictToLoggedInUserOnly, urlRoutes);
+app.use("/", checkAuth, staticRoute);
+app.use("/user", userRoute);
 
 app.listen(PORT, () => console.log(`Server running at PORT:${PORT}`));
