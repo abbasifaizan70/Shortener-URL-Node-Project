@@ -31,23 +31,8 @@ This is a simple URL shortener service built with Node.js and MongoDB. It allows
    ```sh
    npm start
 
-### Usage
-#### Shortening a URL
-- Endpoint: POST http://localhost:8001/url
-- Body:
-  ```sh
-  {
-    "url": "https://example.com"
-  }
-- This will return a JSON response with the shortened URL.
-
-### Redirecting to the Original URL
-- Visit http://localhost:8001/[shortId] in your browser.
-- You will be redirected to the original URL associated with the shortId.
-
-### Checking Analytics
-- Endpoint: GET http://localhost:8001/url/analytics/[shortId]
-- This endpoint provides the number of times the shortened URL has been visited.
+### Interface
+- Endpoint: GET http://localhost:8001/ to interact with UI
 
 ### Contributing
 - Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.

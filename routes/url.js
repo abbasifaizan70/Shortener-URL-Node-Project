@@ -2,11 +2,13 @@ const express = require('express');
 const {
   handleGenerateShortURL,
   handleReturnOriginalURL,
-  handleGetAnalytics
+  handleGetAnalytics,
+  handleGetAllURL
 } = require("../controllers/url");
 
 const routes = express.Router();
 
+routes.get("/", handleGetAllURL);
 routes.post("/", handleGenerateShortURL);
 routes.get("/analytics/:shortId", handleGetAnalytics);
 routes.get("/:shortId", handleReturnOriginalURL);
