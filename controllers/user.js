@@ -14,10 +14,10 @@ const handleSignIn = async (req, res) => {
   if (!user) {
     return res.render("login", { error: "Invalid Credentials" });
   }
-  const sessionId = uuidv4();
-  setUser(sessionId, user);
-  res.cookie("uid", sessionId);
-  return res.redirect("/");
+
+  const token = setUser(user);
+  res.cookie("token", token);
+  return res.redirect('/');
 };
 
 module.exports = { handleSignUp, handleSignIn };
